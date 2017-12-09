@@ -32,15 +32,15 @@ double computeY(int i1, int j1, int i2, int j2, Mat& first, Mat&second)
 		//cout << "hey" << endl;
 		//cout << i1 << " " << i2 << " " << j1 << " " << j2 << " " << endl;
 		Scalar G_i1_alpha1 = (Scalar(first.at<Vec3b>(i1 + 1, j1)) - Scalar(first.at<Vec3b>(i1 - 1, j1))) / 2;
-		Scalar G_i2_alpha1 = (Scalar(first.at<Vec3b>(i2 + 1, j1)) - Scalar(first.at<Vec3b>(i2 - 1, j1))) / 2;
+		Scalar G_i2_alpha1 = (Scalar(first.at<Vec3b>(i2 + 1, j2)) - Scalar(first.at<Vec3b>(i2 - 1, j2))) / 2;
 		Scalar G_i1_alpha2 = (Scalar(second.at<Vec3b>(i1 + 1, j1)) - Scalar(second.at<Vec3b>(i1 - 1, j1))) / 2;
-		Scalar G_i2_alpha2 = (Scalar(second.at<Vec3b>(i2 + 1, j1)) - Scalar(second.at<Vec3b>(i2 - 1, j1))) / 2;
+		Scalar G_i2_alpha2 = (Scalar(second.at<Vec3b>(i2 + 1, j2)) - Scalar(second.at<Vec3b>(i2 - 1, j2))) / 2;
 		Scalar G_j1_alpha1 = (Scalar(first.at<Vec3b>(i1, j1 + 1)) - Scalar(first.at<Vec3b>(i1, j1 - 1))) / 2;
-		Scalar G_j2_alpha1 = (Scalar(first.at<Vec3b>(i2, j1 + 1)) - Scalar(first.at<Vec3b>(i2, j1 - 1))) / 2;
+		Scalar G_j2_alpha1 = (Scalar(first.at<Vec3b>(i2, j2 + 1)) - Scalar(first.at<Vec3b>(i2, j2 - 1))) / 2;
 		Scalar G_j1_alpha2 = (Scalar(second.at<Vec3b>(i1, j1 + 1)) - Scalar(second.at<Vec3b>(i1, j1 - 1))) / 2;
-		Scalar G_j2_alpha2 = (Scalar(second.at<Vec3b>(i2, j1 + 1)) - Scalar(second.at<Vec3b>(i2, j1 - 1))) / 2;
+		Scalar G_j2_alpha2 = (Scalar(second.at<Vec3b>(i2, j2 + 1)) - Scalar(second.at<Vec3b>(i2, j2 - 1))) / 2;
 		//cout << "nice" << endl;
-		return((norm(G_i1_alpha1 - G_i1_alpha2) + norm(G_j1_alpha1 - G_j1_alpha2) + norm(G_i2_alpha1 - G_i2_alpha2) + norm(G_j2_alpha1 - G_j2_alpha2)));
+		return(sqrt(norm(G_i1_alpha1 - G_i1_alpha2, NORM_L2SQR) + norm(G_j1_alpha1 - G_j1_alpha2, NORM_L2SQR)) + sqrt(norm(G_i2_alpha1 - G_i2_alpha2, NORM_L2SQR) + norm(G_j2_alpha1 - G_j2_alpha2, NORM_L2SQR)));
 	}
 }
 
