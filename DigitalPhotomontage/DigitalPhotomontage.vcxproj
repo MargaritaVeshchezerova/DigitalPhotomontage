@@ -149,7 +149,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AlphaExpansion.h" />
+    <ClInclude Include="AlphaExpansionOptimized.h" />
     <ClInclude Include="DatabaseUpload.h" />
     <ClInclude Include="InteractionPenalty.h" />
     <ClInclude Include="InteractiveSelection.h" />
@@ -157,10 +157,11 @@
     <ClInclude Include="maxflow\graph.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Test2.h" />
     <ClInclude Include="Tests.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AlphaExpansion.cpp" />
+    <ClCompile Include="AlphaExpansionOptimized.cpp" />
     <ClCompile Include="DatabaseUpload.cpp" />
     <ClCompile Include="DigitalPhotomontage.cpp" />
     <ClCompile Include="InteractionPenalty.cpp" />
@@ -172,6 +173,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Test2.cpp" />
     <ClCompile Include="Tests.cpp" />
   </ItemGroup>
   <ItemGroup>

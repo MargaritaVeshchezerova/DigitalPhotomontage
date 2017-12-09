@@ -65,7 +65,7 @@ void CallBackFunc(int event, int x, int y, int flags, void* userdata)
 };
 
 
-Mat* labeling(vector<Mat>& dataset, int size)
+Mat* labeling_optimized(vector<Mat>& dataset, int size)
 {
 	n = size;
 	if (n == 0)
@@ -112,3 +112,53 @@ Mat* labeling(vector<Mat>& dataset, int size)
 	return labels;
 }
 
+
+vector<Mat*>* labeling(vector<Mat>& dataset, int size)
+{
+	n = size;
+	if (n == 0)
+		return NULL;
+
+	int rows = dataset[0].rows;
+	int cols = dataset[0].cols;
+
+
+	vector<ExchangedData*>* collectedData = new vector<ExchangedData*>();
+	vector<Mat*>* collectedLabel = new vector<Mat*>();
+	for (int i = 0; i < n; i++)
+	{
+		Mat* labels = new Mat(-1 * Mat::ones(rows, cols, CV_32SC1));
+		collectedData->push_back(new ExchangedData(dataset[i], *labels, i));
+		collectedLabel->push_back(labels);
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		namedWindow("Window: " + i, WINDOW_NORMAL | WINDOW_KEEPRATIO);
+		createTrackbar("Brush radius: " + i, "Window: " + i, (*collectedData)[i]->radius, 100, NULL, NULL);
+		setMouseCallback("Window: " + i, CallBackFunc, (*collectedData)[i]);
+	}
+	while (1)
+	{
+		for (int i = 0; i < n; i++)
+		{
+			setTrackbarPos("Brush radius: " + i, "Window: " + i, *(*collectedData)[i]->radius);
+			imshow("Window: " + i, (*collectedData)[i]->image);
+		}
+		if (waitKey(40) == 27)
+		{
+			destroyAllWindows();
+			break;
+		}
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		delete (*collectedData)[i];
+	}
+
+
+	delete collectedData;
+
+	return collectedLabel;
+}

@@ -5,4 +5,5 @@
 
 using namespace cv;
 
-void test1(char* directory);
+void test1(char* directory, char* result_name);
+//void test2(char* directory, char* result_name);

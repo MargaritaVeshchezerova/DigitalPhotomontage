@@ -7,4 +7,5 @@
 using namespace std;
 using namespace cv;
 
-Mat* labeling(vector<Mat>& dataset, int size);
+Mat* labeling_optimized(vector<Mat>& dataset, int size);
+vector<Mat*>* labeling(vector<Mat>& dataset, int size);
